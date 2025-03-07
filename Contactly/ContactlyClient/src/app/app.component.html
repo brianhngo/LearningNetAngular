@@ -1,0 +1,65 @@
+<div class="flex h-screen">
+  <div class="w-[50%]">
+    <form (ngSubmit)="SubmitFormHandler()" [formGroup]="contactsForm">
+      <h1 class="py-10 font-extrabold text-5xl">Contactly</h1>
+      <div>
+        <label for="name" class="font-bold"> Name</label>
+        <input
+          type="text"
+          class="w-full p-2 border-2 rounded-sm mt-2"
+          formControlName="name"
+        />
+      </div>
+      <div>
+        <label for="email" class="font-bold"> Email</label>
+        <input
+          type="text"
+          class="w-full p-2 border-2 rounded-sm mt-2"
+          formControlName="email"
+        />
+      </div>
+      <div>
+        <label for="phone" class="font-bold"> Phone</label>
+        <input
+          type="text"
+          class="w-full p-2 border-2 rounded-sm mt-2"
+          formControlName="phone"
+        />
+      </div>
+      <div>
+        <label for="favorite" class="font-bold"> Favorite</label>
+        <input
+          type="checkbox"
+          class="w-full p-2 border-2 rounded-sm mt-2"
+          formControlName="favorite"
+        />
+      </div>
+      <button>Submit</button>
+    </form>
+  </div>
+  <div class="w-[50%] overflow-auto">
+    @if (contacts$ | async; as contacts) { @if (contacts.length > 0) { @for
+    (contact of contacts; track $index) {
+    <li class="p-2 bg-slate-100 border-b-2 border-slate-200">
+      <span class="font-light text-3xl"> {{ contact.name }} </span>
+      <div>
+        <span>
+          <span>
+            {{ contact.email }}
+            <button
+              class="bg-slate-50 text-red-500 text-dark py-2 px-4 rounded-sm"
+              type="button"
+            >
+              Delete
+            </button>
+          </span>
+        </span>
+      </div>
+    </li>
+    } } @else {
+    <p>No Contacts Found</p>
+    } } @else {
+    <p>Loading...</p>
+    }
+  </div>
+</div>
